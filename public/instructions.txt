@@ -1,0 +1,8 @@
+config firebase
+
+create-react-app
+npm i react-router-dom
+
+react redux firebase
+
+npm i redux react-redux react-redux-firebase redux-firestore firebase
