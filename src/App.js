@@ -20,7 +20,7 @@ class App extends Component {
                 <Route exact path="/client/:id" component={ClientDetail}/>
               </Switch>
             </div>
-          </div>
+          </div> 
         </Router>
       </Provider>
     );
