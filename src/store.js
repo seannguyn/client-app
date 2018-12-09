@@ -45,20 +45,7 @@ const rootReducer = combineReducers({
   settings: settingReducer
 });
 
-// Local storage stuff
-if (window.localStorage.getItem('settings') === null) {
-  const defaultSetting = {
-    balanceOnAdd: false,
-    balanceOnEdit: false,
-    allowRegistration: true
-  }
-
-  window.localStorage.setItem('settings', JSON.stringify(defaultSetting))
-}
-
-const initialState = {
-setting: JSON.parse(window.localStorage.getItem('settings')),
-}
+const initialState = {}
 
 const store = createStoreWithFirebase(
     rootReducer,
