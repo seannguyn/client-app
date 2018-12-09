@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
 class EditClient extends Component {
@@ -39,6 +41,7 @@ class EditClient extends Component {
 
     render() {
         const {client} = this.props;
+        const {balanceOnEdit} = this.props.setting;
         return (
             <div style={{heigh:'1000px', width:'500px'}}>
                 
@@ -101,6 +104,7 @@ class EditClient extends Component {
                         name="balance"
                         ref={this.balanceInput}
                         defaultValue={client.balance}
+                        disabled={!!balanceOnEdit}
                         />
                     </div>
 
@@ -116,4 +120,9 @@ class EditClient extends Component {
     }
 }
 
-export default firestoreConnect()(EditClient);
+export default compose(
+    firestoreConnect(),
+    connect((state,props) => ({
+        setting: state.settings.setting
+    }))
+)(EditClient);

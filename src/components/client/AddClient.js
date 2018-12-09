@@ -4,7 +4,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-class AddModal extends Component {
+class AddClient extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +34,7 @@ class AddModal extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
     render() {
+        const {balanceOnAdd} = this.props.setting;
         return (
         <div style={{heigh:'1000px', width:'500px'}}>
             
@@ -96,6 +97,7 @@ class AddModal extends Component {
                     name="balance"
                     onChange={this.onChange}
                     value={this.state.balance}
+                    disabled={!!balanceOnAdd}
                     />
                 </div>
 
@@ -111,8 +113,14 @@ class AddModal extends Component {
     }
 }
 
-export default firestoreConnect()(AddModal);
+export default compose(
+    firestoreConnect(),
+    connect((state,props) => ({
+        setting: state.settings.setting
+    }))
+)(AddClient);
 
-AddModal.propTypes ={
+
+AddClient.propTypes ={
     firestore: PropTypes.object.isRequired
 }
